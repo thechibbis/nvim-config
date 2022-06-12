@@ -1,0 +1,144 @@
+set encoding=UTF-8
+let mapleader =","
+
+call plug#begin('~/.config/nvim/plugged') 
+
+" Best bar 4ever
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Github Copilot
+Plug 'github/copilot.vim'
+
+" tree
+Plug 'scrooloose/nerdtree'
+
+" for icons
+Plug 'ryanoasis/vim-devicons'
+
+" tartaruga
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" auto pairs
+Plug 'jiangmiao/auto-pairs'
+
+" for markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+
+" formater yay
+Plug 'sbdchd/neoformat'
+
+" Colorscheme
+Plug 'flazz/vim-colorschemes'
+Plug 'Rigellute/shades-of-purple.vim'
+
+" fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+"Discord RPC
+Plug 'andweeb/presence.nvim'
+
+" Dashboard
+Plug 'glepnir/dashboard-nvim'
+
+" Notify
+Plug 'rcarriga/nvim-notify'
+
+call plug#end()
+
+
+filetype indent plugin on
+if !exists('g:syntax_on') | syntax enable | endif
+
+let g:shades_of_purple_airline = 1
+let g:airline_theme='shades_of_purple'
+
+let g:airline_powerline_fonts = 1
+
+let g:airline#extensions#tabline#enabled = 1
+
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+let g:neoformat_enabled_c = ['astyle']
+let g:neoformat_enabled_markdown = ['prettier']
+
+let g:dashboard_default_executive ='fzf'
+
+let g:dashboard_custom_header = [
+    \' _____________  ________________________  _______________________________________',
+    \' ___  __/__  / / /__  ____/_  ____/__  / / /___  _/__  __ )__  __ )___  _/_  ___/',
+    \' __  /  __  /_/ /__  __/  _  /    __  /_/ / __  / __  __  |_  __  |__  / _____ \ ',
+    \' _  /   _  __  / _  /___  / /___  _  __  / __/ /  _  /_/ /_  /_/ /__/ /  ____/ / ',
+    \' /_/    /_/ /_/  /_____/  \____/  /_/ /_/  /___/  /_____/ /_____/ /___/  /____/  ',                                                                               
+    \' _______________________________________________________________________________',
+    \'/                                       |                                       \',
+    \'|   ⣿⣿⣿⣿⣯⣿⣿⠄⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠈⣿⣿⣿⣿⣿⣿⣆       |      ⣐⢕⢕⢕⢕⢕⢕⢕⢕⠅⢗⢕⢕⢕⢕⢕⢕⢕⠕⠕⢕⢕⢕⢕⢕⢕⢕⢕⢕    |',
+    \'|   ⢻⣿⣿⣿⣾⣿⢿⣢⣞⣿⣿⣿⣿⣷⣶⣿⣯⣟⣿⢿⡇⢃⢻⣿⣿⣿⣿⣿⢿⡄      |     ⢐⢕⢕⢕⢕⢕⣕⢕⢕⠕⠁⢕⢕⢕⢕⢕⢕⢕⢕⠅⡄⢕⢕⢕⢕⢕⢕⢕⢕⢕    |',
+    \'|   ⠄⢿⣿⣯⣏⣿⣿⣿⡟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣧⣾⢿⣮⣿⣿⣿⣿⣾⣷      |     ⢕⢕⢕⢕⢕⠅⢗⢕⠕⣠⠄⣗⢕⢕⠕⢕⢕⢕⠕⢠⣿⠐⢕⢕⢕⠑⢕⢕⠵⢕    |',
+    \'|   ⠄⣈⣽⢾⣿⣿⣿⣟⣄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣝⣯⢿⣿⣿⣿⣿      |     ⢕⢕⢕⢕⠁⢜⠕⢁⣴⣿⡇⢓⢕⢵⢐⢕⢕⠕⢁⣾⢿⣧⠑⢕⢕⠄⢑⢕⠅⢕    |',
+    \'|   ⣿⠟⣫⢸⣿⢿⣿⣾⣿⢿⣿⣿⢻⣿⣿⣿⢿⣿⣿⣿⢸⣿⣼⣿⣿⣿⣿⣿⣿⣿      |     ⢕⢕⠵⢁⠔⢁⣤⣤⣶⣶⣶⡐⣕⢽⠐⢕⠕⣡⣾⣶⣶⣶⣤⡁⢓⢕⠄⢑⢅⢑    |',
+    \'|   ⡟⢸⣟⢸⣿⠸⣷⣝⢻⠘⣿⣿⢸⢿⣿⣿⠄⣿⣿⣿⡆⢿⣿⣼⣿⣿⣿⣿⢹⣿      |     ⠍⣧⠄⣶⣾⣿⣿⣿⣿⣿⣿⣷⣔⢕⢄⢡⣾⣿⣿⣿⣿⣿⣿⣿⣦⡑⢕⢤⠱⢐    |',
+    \'|   ⡇⣿⡿⣿⣿⢟⠛⠛⠿⡢⢻⣿⣾⣞⣿⡏⠖⢸⣿⢣⣷⡸⣇⣿⣿⣿⢼⡿⣿⣿      |     ⢠⢕⠅⣾⣿⠋⢿⣿⣿⣿⠉⣿⣿⣷⣦⣶⣽⣿⣿⠈⣿⣿⣿⣿⠏⢹⣷⣷⡅⢐    |',
+    \'|   ⣡⢿⡷⣿⣿⣾⣿⣷⣶⣮⣄⣿⣏⣸⣻⣃⠭⠄⠛⠙⠛⠳⠋⣿⣿⣇⠙⣿⢸⣿      |     ⣔⢕⢥⢻⣿⡀⠈⠛⠛⠁⢠⣿⣿⣿⣿⣿⣿⣿⣿⡀⠈⠛⠛⠁⠄⣼⣿⣿⡇⢔    |',
+    \'|   ⠫⣿⣧⣿⣿⣿⣿⣿⣿⣿⣿⣿⠻⣿⣾⣿⣿⣿⣿⣿⣿⣿⣷⣿⣿⣹⢷⣿⡼⠋      |     ⢕⢕⢽⢸⢟⢟⢖⢖⢤⣶⡟⢻⣿⡿⠻⣿⣿⡟⢀⣿⣦⢤⢤⢔⢞⢿⢿⣿⠁⢕    |',
+    \'|    ⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⣿⣿⣿        |     ⢕⢕⠅⣐⢕⢕⢕⢕⢕⣿⣿⡄⠛⢀⣦⠈⠛⢁⣼⣿⢗⢕⢕⢕⢕⢕⢕⡏⣘⢕    |',
+    \'|     ⢻⢹⣿⠸⣿⣿⣿⣿⣿⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣼⣿⣿⣿⣿⡟        |     ⢕⢕⠅⢓⣕⣕⣕⣕⣵⣿⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣷⣕⢕⢕⢕⢕⡵⢀⢕⢕    |',
+    \'|     ⠈⢸⣿ ⠙⢿⣿⣿⣹⣿⣿⣿⣿⣟⡃⣽⣿⣿⡟⠁⣿⣿⢻⣿⣿⢿        |     ⢑⢕⠃⡈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢃⢕⢕⢕    |',
+    \'|      ⠘⣿⡄  ⠙⢿⣿⣿⣾⣿⣷⣿⣿⣿⠟⠁  ⣿⣿⣾⣿⡟⣿        |     ⣆⢕⠄⢱⣄⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⢁⢕⢕⠕⢁    |',
+    \'|       ⢻⡇⠸⣆⠄ ⠈⠻⣿⡿⠿⠛⠉    ⢸⣿⣇⣿⣿⢿⣿        |     ⣿⣦⡀⣿⣿⣷⣶⣬⣍⣛⣛⣛⡛⠿⠿⠿⠛⠛⢛⣛⣉⣭⣤⣂⢜⠕⢑⣡⣴⣿    |',
+    \'|_______________________________________|_______________________________________|',
+    \]
+
+" Shortcutting split navigation, saving a keypress:
+    map <C-h> <C-w>h
+    map <C-j> <C-w>j
+    map <C-k> <C-w>k
+    map <C-l> <C-w>l
+
+set number
+
+" KEYBINDS
+map <leader>f :Neoformat<CR>
+map <leader>q :wq!<CR>
+map <leader>w :w!<CR>
+map <leader>cc :CocList marketplace<CR>
+
+" Nerd tree
+    map <leader>n :NERDTreeToggle<CR>
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    if has('nvim')
+        let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
+    else
+        let NERDTreeBookmarksFile = '~/.vim' . '/NERDTreeBookmarks'
+    endif
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+" let ayucolor="mirage" " for mirage version of theme
+colorscheme shades_of_purple

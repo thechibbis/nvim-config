@@ -5,6 +5,6 @@ Minha config para o NeoVim com auto-complete, dashboard e muito mais!
 
 primeiramente clone esse repositorio para a ~/.config/nvim
 
-depois disso abra com o nvim o arquivo init.vim
+depois disso abra com o nvim o arquivo init.lua
 
-e rode o comando `:PlugInstall`
+após isso rode o comando `:PackerSync`
